@@ -49,7 +49,7 @@ class ModelTrainer:
             mlflow.sklearn.log_model(best_model,"model")
 
             if tracking_url_type_store != "file":
-                mlflow.sklearn.log_model(best_model, "model", registered_model_name=best_model)
+                mlflow.sklearn.log_model(best_model, "model", registered_model_name="best_model")
             else:
                 mlflow.sklearn.log_model(best_model, "model")
 
@@ -110,7 +110,7 @@ class ModelTrainer:
         os.makedirs(model_dir_path , exist_ok=True)
 
         Network_Model=NetworkModel(preprocessor=preprocessor,model=best_model)
-        save_object(self.config.trained_model_file_path,obj=NetworkModel)
+        save_object(self.config.trained_model_file_path,obj=Network_Model)
         save_object("final_model/model.pkl",best_model)
 
         model_trainer_artifact=ModelTrainerArtifact(trained_model_file_path=self.config.trained_model_file_path,
